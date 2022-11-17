@@ -50,16 +50,16 @@ Calculate the factorial number of any given number in a recursive fasion storing
 
 
 factorial:
-    STMDB SP!, {LR}		    @ PUSH for ARMSim 1.9.1    CMP r2,#0
-    CMP r2,#0
-    BLE lBas
+    STMDB SP!, {LR}		    @ PUSH to the stack
+    CMP r2,#0               @ compare to 0, if so return
+    BLE lBas                @ return function
     MULS r3,r2,r3           @ Multiply the current res with n-1
     SUBS r2, r2,#1          @ n-1
-    BL factorial
-    BAL lReturn
+    BL factorial            @ call factorial with new n
+    BAL lReturn             @ then return
 
 lBas:
-    MOV r0,#1
+    MOV r0,#1               @ load in 1 into r0 to signal an output 
 lReturn:
     LDMIA SP!, {PC}		    @ POP for ARMSim 1.9.1
 
